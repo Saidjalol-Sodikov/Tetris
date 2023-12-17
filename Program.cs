@@ -105,17 +105,46 @@ int[,] InputFigureScreenMatrix(int[,] oldScreenMatrix, int[,] figureMatrix, int 
 //------------------------
 
 int[,] screenMatrixMain = NewScreenMatrix();
-int firstFigureRowIndex = 5, firstFigureColumnIndex = 6;
+int firstFigureRowIndex = 0, firstFigureColumnIndex = 4;
 ConsoleKeyInfo keyInfo;
 while (true) 
 {
+    int[,] FigureMatrix = NewFigureMatrix();
+    int figureRowIndex = firstFigureRowIndex, figureColumnIndex = firstFigureColumnIndex;
     Console.Clear();
-    //PrintScreen(screenMatrixMain);
-    Console.WriteLine();
-    int[,] newFigureMatrix = NewFigureMatrix();
-    screenMatrixMain = InputFigureScreenMatrix(screenMatrixMain, newFigureMatrix, firstFigureRowIndex, firstFigureColumnIndex);
-    PrintScreen(screenMatrixMain);
-
+    while (true)
+    {
+        int[,] newScreenMatrixMain = InputFigureScreenMatrix(screenMatrixMain, FigureMatrix, figureRowIndex, figureColumnIndex);
+        Console.Clear();
+        PrintScreen(newScreenMatrixMain);
+        keyInfo = Console.ReadKey();
+        if (keyInfo.Key == ConsoleKey.RightArrow)
+        {
+            figureColumnIndex++;
+            newScreenMatrixMain = screenMatrixMain;
+        }
+        if (keyInfo.Key == ConsoleKey.LeftArrow)
+        {
+            figureColumnIndex--;
+            newScreenMatrixMain = screenMatrixMain;
+        }
+        if (keyInfo.Key == ConsoleKey.UpArrow) 
+        {
+            figureRowIndex--;
+            newScreenMatrixMain = screenMatrixMain;
+        }
+        if (keyInfo.Key == ConsoleKey.DownArrow)
+        {
+            figureRowIndex++;
+            newScreenMatrixMain = screenMatrixMain;
+        }
+        if (keyInfo.Key == ConsoleKey.Enter)
+        {
+            screenMatrixMain = newScreenMatrixMain;
+            break;
+        }
+        if (keyInfo.Key == ConsoleKey.Q) return;
+    }
 
 
 //-------------------------------------------
