@@ -21,9 +21,13 @@
                     if (Int32.TryParse(choisStr, out choisInt)){
                     choisInt = int.Parse(choisStr);
                     }
-                    if (choisInt == 0)
+                    if (choisInt == 5)
                     {
                         endGameTotal = false;
+                    }
+                    if (choisInt == 1)
+                    {
+                        Tetris().Game();
                     }
                 }
             }
